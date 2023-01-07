@@ -17,6 +17,42 @@ node getnode(int data){
     return n;
 }
 
+void init(list *l){
+    l->head->left=NULL;
+    l->head->right=NULL;
+}
+
 void insert_front(list *l,int key){
-    
+    node n=getnode(key);
+    if(l->head=NULL){
+        l->head=n;
+        n->left=NULL;
+        n->right=NULL;
+    }
+    n->right=l->head;
+    n->left=NULL;
+    l->head->left=n;
+    l->head=n;
+}
+
+void display(list *l){
+    node cur=l->head;
+    if(cur==NULL)
+        return;
+    while(cur!=NULL){
+        printf("%d->",cur->data);
+        cur=cur->right;
+    }
+}
+
+int main(){
+    list l;
+    init(&l);
+    insert_front(&l,10);
+    insert_front(&l,20);
+    insert_front(&l,30);
+    insert_front(&l,40);
+    insert_front(&l,50);
+    insert_front(&l,60);
+    display(&l);
 }
