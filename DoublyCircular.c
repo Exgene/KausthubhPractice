@@ -79,8 +79,10 @@ void delete_element(list *l,int data)
         l->head=l->tail->right;
         return;
     }
+    
+    cur=cur->right;
 
-    while(cur!=NULL && cur->data!=data)
+    while(cur!=l->head && cur->data!=data)
     {
         cur=cur->right;
     }
