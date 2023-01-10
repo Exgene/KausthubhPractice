@@ -87,7 +87,7 @@ void delete_element(list *l,int data)
         cur=cur->right;
     }
 
-    if(cur==NULL)
+    if(cur==l->head)
     {
         printf("Not Found");
         return;
