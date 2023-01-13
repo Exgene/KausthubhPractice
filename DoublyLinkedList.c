@@ -41,21 +41,55 @@ void insert_front(list *l, int key)
     l->head = n;
 }
 
-void delete(int data)
+void delete(list *l,int data)
 {
-    
+    node cur=l->head;
+    if(l->head==NULL){
+        return;
+    }
+    if(cur->data==data && cur->right==NULL){
+        free(cur);
+        l->head=NULL;
+        return;
+    }
+    if(cur->data==data)
+    {
+        l->head=cur->right;
+        l->head->left=NULL;
+        free(cur);
+        return;
+    }
+    cur= cur->right;
+    while(cur!=NULL && cur->data!=data)
+    {
+        cur=cur->right;
+    }
+    if(cur==NULL){
+        return;
+    }
+    if(cur->right==NULL){
+        cur->left->right=NULL;
+        free(cur);
+        return;
+    }
+    cur->left->right=cur->right;
+    cur->right->left=cur->left;
+    free(cur);
 }
 
 void display(list *l)
 {
     node cur = l->head;
-    if (cur == NULL)
+    if (cur == NULL){
+        printf("No Bicthes");
         return;
+    }
     while (cur!= NULL)
     {
         printf("%d->", cur->data);
         cur = cur->right;
     }
+    printf("\n");
 }
 
 int main()
@@ -65,8 +99,10 @@ int main()
     insert_front(&l, 10);
     insert_front(&l, 20);
     insert_front(&l, 30);
-    insert_front(&l, 40);
-    insert_front(&l, 50);
-    insert_front(&l, 60);
+    // insert_front(&l, 40);
+    // insert_front(&l, 50);
+    // insert_front(&l, 60);
+    display(&l);
+    delete(&l,50);
     display(&l);
 }
